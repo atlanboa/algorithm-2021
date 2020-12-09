@@ -30,7 +30,9 @@ public class 백준1655_가운데를말해요 {
                 minHeap.add(b);
                 maxHeap.add(a);
             }
-            System.out.println(maxHeap.peek());
+            bw.write(maxHeap.peek()+"\n");
         }
+        bw.flush();
+        bw.close();
     }
 }
