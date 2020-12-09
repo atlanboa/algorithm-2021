@@ -12,7 +12,6 @@ public class 백준9376_탈옥 {
     static StringTokenizer st = null;
     //빈 공간은 '.', 지나갈 수 없는 벽은 '*', 문은 '#', 죄수의 위치는 '$'이다.
 
-    static final char EMPTY = '.';
     static final char WALL = '*';
     static final char DOOR = '#';
     static final char PRISONER = '$';
@@ -83,11 +82,11 @@ public class 백준9376_탈옥 {
         {
             for (int j = 0; j < prisonerOne[i].length; j++)
             {
-                if (map[i][j] == '*')
+                if (map[i][j] == WALL)
                     continue;
 
                 int sum = prisonerOne[i][j] + prisonerTwo[i][j] + sanggeun[i][j];
-                if (map[i][j] == '#')
+                if (map[i][j] == DOOR)
                 {
                     sum -= 2;
                 }
@@ -113,12 +112,6 @@ public class 백준9376_탈옥 {
         while (!queue.isEmpty())
         {
             Prisoner temp = queue.poll();
-
-//            if (map[temp.x][temp.y] == '#')
-//            {
-//                temp.openDoor += 1;
-//            }
-
             doorHistory[temp.x][temp.y] = temp.openDoor;
 
             for (int i = 0; i < 4; i++)
@@ -128,10 +121,10 @@ public class 백준9376_탈옥 {
                 nx = temp.x + dx[i];
                 ny = temp.y + dy[i];
                 if (0 <= nx && nx < h + 2 && 0 <= ny && ny < w + 2 && !visited[nx][ny]
-                && map[nx][ny] != '*')
+                && map[nx][ny] != WALL)
                 {
                     visited[nx][ny] = true;
-                    queue.add(new Prisoner(nx, ny, map[nx][ny] == '#' ? temp.openDoor + 1 : temp.openDoor));
+                    queue.add(new Prisoner(nx, ny, map[nx][ny] == DOOR ? temp.openDoor + 1 : temp.openDoor));
                 }
             }
         }
